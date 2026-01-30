@@ -1,9 +1,3 @@
----
-
-id: visualizer-setup
-title: Visualizer(Plugin for PBA) Setup
-sidebar_position: 40
----
 # Visualizer(Plugin for PBA) Setup Manual
 
 1. Unzip **Visualizer.zip** to the **pentaho-solutions\system** directory
@@ -12,13 +6,28 @@ sidebar_position: 40
 
    **Note: If there is an old version of the Visualizer plugin in the system directory, it needs to be deleted; changing the folder name is also not allowed.**
 
-2. Modify the **ImportHandlerMimeTypeDefinitions.xml** file in the **pentaho-solutions\system** directory and add the following content.
+2. Modify the **ImportHandlerMimeTypeDefinitions.xml** file in the **pentaho-solutions\system** directory.
+
+   Add `<extension>datafor</extension>` to the `<MimeTypeDefinition mimeType="application/octet-stream" hidden="false">` node. This configuration is required for uploading and downloading Visualizer reports.
 
    ```
-   <extension>datafor</extension>
+   <MimeTypeDefinition mimeType="application/octet-stream" hidden="false">
+       <extension>eml</extension>
+   	<extension>datafor</extension>
+   </MimeTypeDefinition>
    ```
 
-   <div align="left"><img src="../../../../../static/img/en/datafor/setup/image-20240117143902798.png" /></div>
+   Add `<extension>json</extension>` and `<extension>geojson</extension>` to the `<MimeTypeDefinition mimeType="application/json" hidden="false">` node. This configuration is required for initializing and uploading/downloading GeoJSON maps.
+   
+   ```
+   <MimeTypeDefinition mimeType="application/json" hidden="false">
+       <extension>df</extension>
+   	<extension>json</extension>
+       <extension>geojson</extension>
+   </MimeTypeDefinition>
+   ```
+   ![image-20250523103543168](C:\Users\Jim\AppData\Roaming\Typora\typora-user-images\image-20250523103543168.png)
+
 
 3. Modify the **applicationContext-spring-security.xml** file in the **pentaho-solutions\system** directory.
 
@@ -53,5 +62,5 @@ sidebar_position: 40
 
 6. Restart PBA
 
-   <div align="left"><img src="../../../../../static/img/en/datafor/setup/1692583886673-1692584228417-11.png" /></div>
+   <div align="left"><img src="../../../../../static/img/en/datafor/setup/image-20250522223650441.png" /></div>
 
